@@ -1,11 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Temperature Data</title>
+  <style>
+    .table-container {
+      overflow-x: auto;
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <p>growing</p>
+  <h1>Temperature Data</h1>
+  <div class="table-container">
+    <form id="baseTempForm">
+      <label for="baseTempInput">Base Temperature:</label>
+      <input type="number" id="baseTempInput" required>
+      <button type="submit">Submit</button>
+    </form>
+
+    <h2>Temperature Data Table</h2>
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Min Temp</th>
+          <th>Max Temp</th>
+          <th>Base Temp</th>
+          <th>Min Accumulated</th>
+          <th>Positive GDD</th>
+          <th>Cumulative Sum</th>
+        </tr>
+      </thead>
+      <tbody id="dataBody">
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container">
+    <canvas id="chart"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
