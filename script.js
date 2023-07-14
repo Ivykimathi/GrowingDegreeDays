@@ -41,25 +41,38 @@ function calculateCumulativeSum(values) {
   return cumulativeSumArray;
 }
 
-function generateTemperatureValues() {
+function getStartOfMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
+}
+
+function getEndOfMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+}
+
+function formatDate(date) {
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return date.toLocaleDateString(undefined, options);
+}
+
+function generateTemperatureValues(startDate, endDate) {
   const temperatureValues = [];
+  let currentDate = new Date(startDate);
 
-  // Generate random temperature values for 10 days
-  for (let day = 1; day <= 10; day++) {
-    // Generate a random number between 10 and 35 for minimum temperature
+  // Generate random temperature values for the given date range
+  while (currentDate <= endDate) {
+    const day = currentDate.getDate();
+    const formattedDate = formatDate(currentDate);
     const minTemp = Math.floor(Math.random() * 26) + 10;
-
-    // Call the function with the value in B6
     const maxTemp = addRandomNumber(minTemp);
 
-    // Store the day, min, and max temperatures in the array
-    temperatureValues.push([day, minTemp, maxTemp]);
+    temperatureValues.push([day, formattedDate, minTemp, maxTemp]);
+    currentDate.setDate(currentDate.getDate() + 1);
   }
 
   return temperatureValues;
 }
 
-function displayData(baseTemp) {
+function displayData(baseTemp, startDate, endDate) {
   const dataBody = document.getElementById("dataBody");
   dataBody.innerHTML = "";
 
@@ -71,11 +84,15 @@ function displayData(baseTemp) {
   const positiveGDD = [];
   const cumulativeSumArray = []; // Array to store cumulative sum values
 
+  // Generate temperature values for the selected date range
+  temperatureValues = generateTemperatureValues(startDate, endDate);
+
   // Calculate the average temperature and other values for each day
   for (const temp of temperatureValues) {
     const day = temp[0];
-    const minTemp = temp[1];
-    const maxTemp = temp[2];
+    const date = temp[1];
+    const minTemp = temp[2];
+    const maxTemp = temp[3];
 
     // Calculate the average temperature
     const averageTemp = (minTemp + maxTemp) / 2;
@@ -92,6 +109,7 @@ function displayData(baseTemp) {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${day}</td>
+      <td>${date}</td>
       <td>${minTemp}</td>
       <td>${maxTemp}</td>
       <td>${baseTemp}</td>
@@ -103,16 +121,16 @@ function displayData(baseTemp) {
   }
 
   // Display the line graph
-  displayLineGraph(temperatureValues.map(temp => temp[0]), cumulativeSumArray);
+  displayLineGraph(temperatureValues.map(temp => temp[1]), cumulativeSumArray);
 }
 
-function displayLineGraph(days, cumulativeSum) {
+function displayLineGraph(dates, cumulativeSum) {
   const ctx = document.getElementById("chart").getContext("2d");
 
   new Chart(ctx, {
     type: "line",
     data: {
-      labels: days,
+      labels: dates,
       datasets: [
         {
           label: "Cumulative Sum of Positive GDD",
@@ -130,7 +148,7 @@ function displayLineGraph(days, cumulativeSum) {
           display: true,
           title: {
             display: true,
-            text: "Day",
+            text: "Date",
           },
         },
         y: {
@@ -146,18 +164,33 @@ function displayLineGraph(days, cumulativeSum) {
 }
 
 // Add event listener to the baseTempForm submit event
-document.getElementById("baseTempForm").addEventListener("submit", function(event) {
+document.getElementById("baseTempForm").addEventListener("submit", function (event) {
   event.preventDefault();
 
-  // Get the base temperature from the input
+  // Get the base temperature and date range from the inputs
   const baseTempInput = document.getElementById("baseTempInput");
   const baseTemp = parseFloat(baseTempInput.value);
 
-  // Generate random temperature values for 10 days
-  temperatureValues = generateTemperatureValues();
+  const dateRangeSelect = document.getElementById("dateRange");
+  const selectedRange = dateRangeSelect.value;
+  const currentDate = new Date();
+  let startDate, endDate;
+
+  // Calculate the start and end dates based on the selected range
+  if (selectedRange === "previous_month") {
+    startDate = getStartOfMonth(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+    endDate = getEndOfMonth(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+  } else if (selectedRange === "current_month") {
+    startDate = getStartOfMonth(currentDate);
+    endDate = currentDate;
+  } else if (selectedRange === "last_30_days") {
+    startDate = new Date();
+    startDate.setDate(currentDate.getDate() - 29);
+    endDate = currentDate;
+  }
 
   // Display the data on the table and line graph
-  displayData(baseTemp);
+  displayData(baseTemp, startDate, endDate);
 
   // Reset the base temperature input
   baseTempInput.value = "";

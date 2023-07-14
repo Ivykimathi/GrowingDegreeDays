@@ -20,6 +20,12 @@
     <form id="baseTempForm">
       <label for="baseTempInput">Base Temperature:</label>
       <input type="number" id="baseTempInput" required>
+      <label for="dateRange">Date Range:</label>
+      <select id="dateRange">
+        <option value="previous_month">Previous Month</option>
+        <option value="current_month">Current Month</option>
+        <option value="last_30_days">Last 30 Days</option>
+      </select>
       <button type="submit">Submit</button>
     </form>
 
@@ -28,6 +34,7 @@
       <thead>
         <tr>
           <th>Day</th>
+          <th>Date</th>
           <th>Min Temp</th>
           <th>Max Temp</th>
           <th>Base Temp</th>
