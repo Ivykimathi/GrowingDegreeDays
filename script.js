@@ -136,7 +136,7 @@ function displayLineGraph(dates, cumulativeSum) {
           label: "Cumulative Sum of Positive GDD",
           data: cumulativeSum,
           backgroundColor: "rgba(75, 192, 192, 0.2)",
-          borderColor: "rgba(75, 192, 192, 1)",
+          borderColor: "rgba(0, 128, 0, 1)",
           borderWidth: 2,
           pointRadius: 0,
         },
@@ -149,13 +149,23 @@ function displayLineGraph(dates, cumulativeSum) {
           title: {
             display: true,
             text: "Date",
+            color:"black",
+            borderColor:"rgba(0,0,0,1)",
+          },
+          ticks: {
+            color: "black", // Set x-axis values color to black
           },
         },
         y: {
           display: true,
           title: {
             display: true,
-            text: "Cumulative Sum",
+            text: "Cumulative GDD",
+            color:"black",
+            borderColor:"rgba(0,0,0,1)",
+          },
+          ticks: {
+            color: "black", // Set x-axis values color to black
           },
         },
       },

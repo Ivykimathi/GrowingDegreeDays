@@ -2,9 +2,12 @@
 <html>
 <head>
   <title>Temperature Data</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     .table-container {
+      margin-top: 60px;
       overflow-x: auto;
+      display: flex;
     }
 
     .chart-container {
@@ -15,37 +18,75 @@
   </style>
 </head>
 <body>
-  <h1>Temperature Data</h1>
+
+  <nav class="navbar" id="home" name="home">
+    <div class="navbar_container">
+       <img style="height: 80px; width:130px;" class="img" src="logo.jpg">
+         <!-- <a href="home" id="navbar_logo">KALRO</a> -->
+        <ul class="navbar_menu">
+            <li class="navbar_item">
+              <a href="" class="navbar_links">Home</a>
+            </li>
+            <li class="about_item">
+               <a href="#about" class="navbar_links">About</a>
+            </li>
+            <li class="navbar_item">
+               <a href="#department" class="navbar_links">Departments</a>
+            </li>
+            <li class="navbar_item">
+              <a href="#projects" class="navbar_links">Projects</a>
+           </li>
+            <li class="navbar_btn">
+               <a href="#contact" class="button" title="contact us">CONTACT US</a>
+            </li>
+        </ul>
+      </div>
+     </nav>
+
+     <section class="home">
+      <h2 style="color: green;">Growing Degree Days</h2>
+      <p>Growing Degree Days (GDD) are used to estimate the growth and development of plants
+       and insects during the growing season. The basic concept is that development will
+       only occur if the temperature exceeds some minimum development threshold, or base
+       temperature (TBASE).
+      </p><br>
   <div class="table-container">
+    <div id="inputs">
     <form id="baseTempForm">
-      <label for="baseTempInput">Base Temperature:</label>
-      <input type="number" id="baseTempInput" required>
-      <label for="dateRange">Date Range:</label>
+      <label for="baseTempInput"><h4>BaseTemperature:</h4></label>
+      <input type="number" id="baseTempInput" required><br>
+      <label for="dateRange"><h4>DateRange:</h4></label>
       <select id="dateRange">
         <option value="previous_month">Previous Month</option>
         <option value="current_month">Current Month</option>
         <option value="last_30_days">Last 30 Days</option>
-      </select>
+      </select><br><br>
       <button type="submit">Submit</button>
-    </form>
+    </form><br>
+  </div>
 
-    <h2>Temperature Data Table</h2>
-    <table id="dataTable">
+    
+    <div id="dataTable">
+    <table>
       <thead>
+        
+        <caption><h3>Growing Degree Days for county<br/>
+       Total GDD for the date range of </h3></caption>
         <tr>
-          <th>Day</th>
-          <th>Date</th>
-          <th>Min Temp</th>
-          <th>Max Temp</th>
-          <th>Base Temp</th>
-          <th>Min Accumulated</th>
-          <th>Positive GDD</th>
-          <th>Cumulative Sum</th>
+          <th style="background-color: antiquewhite;">Day</th>
+          <th style="background-color: beige;">Date</th>
+          <th style="background-color: antiquewhite;">Min Temp</th>
+          <th style="background-color: beige;">Max Temp</th>
+          <th style="background-color: antiquewhite;">Base Temp</th>
+          <th style="background-color: beige;">Min Accumulated</th>
+          <th style="background-color: antiquewhite;">Positive GDD</th>
+          <th style="background-color: beige;">Cumulative Sum</th>
         </tr>
       </thead>
       <tbody id="dataBody">
       </tbody>
     </table>
+  </div>
   </div>
 
   <div class="chart-container">
