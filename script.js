@@ -1,6 +1,41 @@
 // Global variable to store temperature values
 let temperatureValues = [];
 
+function fetchTemperatureData(region, startDate, endDate) {
+  const apiKey = "2124e4e8b2266ed9dc09f5386f2d5605"; // Replace with your OpenWeatherAPI key
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${region}&appid=${apiKey}&units=metric`;
+
+  // Show the progress bar
+  const progressBar = document.getElementById("progressBar");
+  progressBar.classList.remove("hidden");
+
+  // Fetch the temperature data for the specified region
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      // Extract the temperature values from the API response
+      const minTemp = data.main.temp_min;
+      const maxTemp = data.main.temp_max;
+
+      // Generate temperature values for the selected date range
+      temperatureValues = generateTemperatureValues(startDate, endDate, minTemp, maxTemp);
+
+      // Display the data on the table and line graph
+      displayData(minTemp, temperatureValues, region);
+
+      // Hide the progress bar
+      progressBar.classList.add("hidden");
+
+      // Reset the base temperature input
+      document.getElementById("baseTempInput").value = "";
+    })
+    .catch(error => {
+      console.log("Error fetching temperature data:", error);
+      // Hide the progress bar
+      progressBar.classList.add("hidden");
+    });
+}
+
 function addRandomNumber(minTemp) {
   // Generate a random number between 1 and 10
   const randomNumber = Math.floor(Math.random() * 10) + 1;
@@ -54,25 +89,25 @@ function formatDate(date) {
   return date.toLocaleDateString(undefined, options);
 }
 
-function generateTemperatureValues(startDate, endDate) {
+function generateTemperatureValues(startDate, endDate, minTemp, maxTemp) {
   const temperatureValues = [];
   let currentDate = new Date(startDate);
 
-  // Generate random temperature values for the given date range
+  // Generate temperature values for the given date range
   while (currentDate <= endDate) {
     const day = currentDate.getDate();
     const formattedDate = formatDate(currentDate);
-    const minTemp = Math.floor(Math.random() * 26) + 10;
-    const maxTemp = addRandomNumber(minTemp);
+    const randomMinTemp = Math.floor(Math.random() * (maxTemp - minTemp + 1)) + minTemp;
+    const randomMaxTemp = addRandomNumber(randomMinTemp);
 
-    temperatureValues.push([day, formattedDate, minTemp, maxTemp]);
+    temperatureValues.push([day, formattedDate, randomMinTemp, randomMaxTemp]);
     currentDate.setDate(currentDate.getDate() + 1);
   }
 
   return temperatureValues;
 }
 
-function displayData(baseTemp, startDate, endDate) {
+function displayData(baseTemp, temperatureValues, region) {
   const dataBody = document.getElementById("dataBody");
   dataBody.innerHTML = "";
 
@@ -82,10 +117,7 @@ function displayData(baseTemp, startDate, endDate) {
   // Initialize arrays to store min accumulated, positive GDD, and cumulative sum
   const minAccumulated = [];
   const positiveGDD = [];
-  const cumulativeSumArray = []; // Array to store cumulative sum values
-
-  // Generate temperature values for the selected date range
-  temperatureValues = generateTemperatureValues(startDate, endDate);
+  const cumulativeSumArray = [];
 
   // Calculate the average temperature and other values for each day
   for (const temp of temperatureValues) {
@@ -122,6 +154,22 @@ function displayData(baseTemp, startDate, endDate) {
 
   // Display the line graph
   displayLineGraph(temperatureValues.map(temp => temp[1]), cumulativeSumArray);
+
+  // Update the table caption with the region and period
+  const dateRangeSelect = document.getElementById("dateRange");
+  const selectedRange = dateRangeSelect.value;
+  let period = "";
+
+  if (selectedRange === "previous_month") {
+    period = "Previous Month";
+  } else if (selectedRange === "current_month") {
+    period = "Current Month";
+  } else if (selectedRange === "last_30_days") {
+    period = "Last 30 Days";
+  }
+
+  const tableCaption = document.getElementById("tableCaption");
+  tableCaption.innerHTML = `<h3>Growing Degree Days for ${region}, Period: ${period}</h3>`;
 }
 
 function displayLineGraph(dates, cumulativeSum) {
@@ -177,7 +225,7 @@ function displayLineGraph(dates, cumulativeSum) {
 document.getElementById("baseTempForm").addEventListener("submit", function (event) {
   event.preventDefault();
 
-  // Get the base temperature and date range from the inputs
+  // Get the base temperature, date range, and region from the inputs
   const baseTempInput = document.getElementById("baseTempInput");
   const baseTemp = parseFloat(baseTempInput.value);
 
@@ -199,9 +247,10 @@ document.getElementById("baseTempForm").addEventListener("submit", function (eve
     endDate = currentDate;
   }
 
-  // Display the data on the table and line graph
-  displayData(baseTemp, startDate, endDate);
+  // Get the region input
+  const regionInput = document.getElementById("regionInput");
+  const region = regionInput.value;
 
-  // Reset the base temperature input
-  baseTempInput.value = "";
+  // Fetch temperature data for the specified region and display it
+  fetchTemperatureData(region, startDate, endDate);
 });

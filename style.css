@@ -1,3 +1,39 @@
+.table-container {
+	margin-top: 60px;
+	overflow-x: auto;
+	display: flex;
+  }
+  
+  .chart-container {
+	width: 100%;
+	height: 400px;
+	margin-top: 20px;
+  }
+  
+  .progress-bar {
+	position: relative;
+	width: 100%;
+	height: 5px;
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	margin-top: 10px;
+  }
+  
+  .progress-bar-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 0;
+	background-color: #4CAF50;
+	border-radius: 3px;
+	transition: width 0.2s ease-in-out;
+  }
+  
+  .hidden {
+	display: none;
+  }
+  
 .navbar{
 	background: white;
 	height:80px;
