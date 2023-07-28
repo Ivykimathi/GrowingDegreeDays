@@ -2,6 +2,7 @@
 	margin-top: 60px;
 	overflow-x: auto;
 	display: flex;
+	
   }
   
   .chart-container {
@@ -19,7 +20,7 @@
 	margin-top: 10px;
   }
   
-  .progress-bar-inner {
+  /* .progress-bar-inner {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -28,7 +29,7 @@
 	background-color: #4CAF50;
 	border-radius: 3px;
 	transition: width 0.2s ease-in-out;
-  }
+  } */
   
   .hidden {
 	display: none;
@@ -118,6 +119,7 @@
 #inputs{
     margin-left: 50px;
     width: 150px;
+	height: 40%;
 }
 
 #baseTempForm{
@@ -128,25 +130,25 @@ h2,h3{
     margin-left: 45px;
 }
 #dataTable{
-    max-height: 300px; /* Adjust the height as needed */
+    max-height: 350px; /* Adjust the height as needed */
     overflow-y: auto;
-    margin-left: 50px;
-    border: 1px solid green;
+    margin-left: 20px;
+    border: 2px solid green;
     width: fit-content;
 }
 
 td:not(:last-child) {
-    border-right: 1px solid black;
+    border-right: 1px solid rgb(243, 24, 4);
   } 
   caption{
-    position: sticky;
+    /* position: sticky; */
     top: 0;
-    background-color: #f2f2f2;
+    background-color: white;
     padding: 10px;
     font-weight: bold;
   }
   th{
-    position: sticky;
+    /* position: sticky; */
     top: 100px;
     background-color: #f2f2f2;
     padding: 10px;

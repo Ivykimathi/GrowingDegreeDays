@@ -140,12 +140,12 @@ function displayData(baseTemp, temperatureValues, region) {
 
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${day}</td>
+    
       <td>${date}</td>
       <td>${minTemp}</td>
       <td>${maxTemp}</td>
-      <td>${baseTemp}</td>
-      <td>${minAccum}</td>
+    
+      
       <td>${Math.max(0, minAccum)}</td>
       <td>${cumulativeSumArray[cumulativeSumArray.length - 1]}</td>
     `;
@@ -167,7 +167,7 @@ function displayData(baseTemp, temperatureValues, region) {
   } else if (selectedRange === "last_30_days") {
     period = "Last 30 Days";
   }
-
+  
   const tableCaption = document.getElementById("tableCaption");
   tableCaption.innerHTML = `<h3>Growing Degree Days for ${region}, Period: ${period}</h3>`;
 }
