@@ -25,12 +25,40 @@
   </style>
 </head>
 <body>
+  <!-- ======= Header/Navbar ======= -->
+  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+    <div class="container">
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <img style="height: 80px; width: 130px;" class="img" src="logo.jpg">
+      </a>
+      <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+        <ul class="navbar-nav">
 
-  <nav class="navbar" id="home" name="home">
-    <div class="navbar_container">
-      <!-- Navbar content... -->
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="about.html">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+
+      <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
+        <i class="bi bi-search"></i>
+      </button>
+
     </div>
-  </nav>
+  </nav><!-- End Header/Navbar -->
 
   <section class="home">
     <h2 style="color: green;">Growing Degree Days</h2>
@@ -47,9 +75,9 @@
             <div class="table-container">
               <div id="inputs">
                 <form id="baseTempForm">
-                  <label for="baseTempInput"><h4>BaseTemperature:</h4></label>
+                  <label for="baseTempInput"><h4>Base Temperature:</h4></label>
                   <input type="number" id="baseTempInput" required><br>
-                  <label for="dateRange"><h4>DateRange:</h4></label>
+                  <label for="dateRange"><h4>Date Range:</h4></label>
                   <select id="dateRange">
                     <option value="previous_month">Previous Month</option>
                     <option value="current_month">Current Month</option>
@@ -70,20 +98,17 @@
 
         <!-- Table covering 60% of the right side -->
         <div class="col-md-8">
-        
           <div id="dataTable" class="table-container">
-  
             <table class="table caption-top">
               <caption id="tableCaption"><h3>Growing Degree Days for County, Period:</h3></caption>
               <thead style="position: sticky;top: 0" class="thead-dark"></thead>
-              
-                <tr>
-                  <th style="background-color: beige;">Date</th>
-                  <th style="background-color: antiquewhite;">Min Temp</th>
-                  <th style="background-color: beige;">Max Temp</th>
-                  <th style="background-color: antiquewhite;">Positive GDD</th>
-                  <th style="background-color: beige;">Cumulative Sum</th>
-                </tr>
+              <tr>
+                <th style="background-color: beige;">Date</th>
+                <th style="background-color: antiquewhite;">Min Temp</th>
+                <th style="background-color: beige;">Max Temp</th>
+                <th style="background-color: antiquewhite;">Positive GDD</th>
+                <th style="background-color: beige;">Cumulative Sum</th>
+              </tr>
               </thead>
               <tbody id="dataBody">
                 <!-- Table data rows will be added dynamically using JavaScript -->
@@ -101,6 +126,28 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
+    <script>
+      // Global variable to store temperature values
+      let temperatureValues = [];
+
+      // Add an event listener to execute when the DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        // Set Nairobi as the default region
+        const regionInput = document.getElementById("regionInput");
+        regionInput.value = "Nairobi";
+
+        // Trigger the temperature data fetching for Nairobi
+        const baseTempInput = document.getElementById("baseTempInput");
+        const dateRangeSelect = document.getElementById("dateRange");
+        const event = new Event("submit");
+        document.getElementById("baseTempForm").dispatchEvent(event);
+
+        // Add event listener to update data when region is changed
+        regionInput.addEventListener("change", function () {
+          document.getElementById("baseTempForm").dispatchEvent(event);
+        });
+      });
+    </script>
   </section>
 </body>
 </html>
