@@ -1,64 +1,35 @@
+User
 <!DOCTYPE html>
 <html>
 <head>
   <title>Temperature Data</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Additional styling for the layout */
-    .container {
-      margin-top: 20px;
-    }
-
-    .table-container {
-      background-color: #f2f2f2;
-      padding: 20px;
-      border-radius: 5px;
-    }
-
-    .chart-container {
-      margin-top: 20px;
-      border: 1px solid #ddd;
-      padding: 20px;
-      border-radius: 5px;
-    }
-  </style>
+  
 </head>
 <body>
-  <!-- ======= Header/Navbar ======= -->
-  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
-    <div class="container">
-      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <a class="navbar-brand" href="#">
-        <img style="height: 80px; width: 130px;" class="img" src="logo.jpg">
-      </a>
-      <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
-        <ul class="navbar-nav">
 
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link " href="about.html">About</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link " href="contact.html">Contact</a>
-          </li>
-        </ul>
-      </div>
-
-      <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
-        <i class="bi bi-search"></i>
-      </button>
-
+  <nav class="navbar" id="home" name="home">
+    <div class="navbar_container">
+      <img style="height: 80px; width:130px;" class="img" src="logo.jpg">
+      <ul class="navbar_menu">
+        <li class="navbar_item">
+          <a href="" class="navbar_links">Home</a>
+        </li>
+        <li class="about_item">
+          <a href="#about" class="navbar_links">About</a>
+        </li>
+        <li class="navbar_item">
+          <a href="#department" class="navbar_links">Departments</a>
+        </li>
+        <li class="navbar_item">
+          <a href="#projects" class="navbar_links">Projects</a>
+        </li>
+        <li class="navbar_btn">
+          <a href="#contact" class="button" title="contact us">CONTACT US</a>
+        </li>
+      </ul>
     </div>
-  </nav><!-- End Header/Navbar -->
+  </nav>
 
   <section class="home">
     <h2 style="color: green;">Growing Degree Days</h2>
@@ -67,87 +38,66 @@
       only occur if the temperature exceeds some minimum development threshold, or base
       temperature (TBASE).
     </p><br>
-    <div class="container">
-      <div class="row">
-        <!-- Form covering 30% of the left side -->
-        <div class="col-md-4">
-          <div class="wrapper">
-            <div class="table-container">
-              <div id="inputs">
-                <form id="baseTempForm">
-                  <label for="baseTempInput"><h4>Base Temperature:</h4></label>
-                  <input type="number" id="baseTempInput" required><br>
-                  <label for="dateRange"><h4>Date Range:</h4></label>
-                  <select id="dateRange">
-                    <option value="previous_month">Previous Month</option>
-                    <option value="current_month">Current Month</option>
-                    <option value="last_30_days">Last 30 Days</option>
-                  </select><br><br>
-                  <label for="regionInput"><h4>Region:</h4></label>
-                  <input type="text" id="regionInput" required><br>
-                  <button type="submit">Submit</button>
-                </form><br>
-              </div>
-
-              <div id="progressBar" class="progress-bar hidden">
-                <div class="progress-bar-inner"></div>
-              </div>
+    <div class="table-container">
+      <div class="container">
+        <div class="row justify-content-start">
+            <div class="wrapper">
+                <div class="table-container">
+                    <div id="inputs">
+                      <form id="baseTempForm">
+                        <label for="baseTempInput"><h4>BaseTemperature:</h4></label>
+                        <input type="number" id="baseTempInput" required><br>
+                        <label for="dateRange"><h4>DateRange:</h4></label>
+                        <select id="dateRange">
+                          <option value="previous_month">Previous Month</option>
+                          <option value="current_month">Current Month</option>
+                          <option value="last_30_days">Last 30 Days</option>
+                        </select><br><br>
+                        <label for="regionInput"><h4>Region:</h4></label>
+                        <input type="text" id="regionInput" required><br>
+                        <button type="submit">Submit</button>
+                      </form><br>
+                    </div>
+      
+                    <div id="progressBar" class="progress-bar hidden">
+                      <div class="progress-bar-inner"></div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
+      </div>
 
-        <!-- Table covering 60% of the right side -->
-        <div class="col-md-8">
-          <div id="dataTable" class="table-container">
-            <table class="table caption-top">
-              <caption id="tableCaption"><h3>Growing Degree Days for County, Period:</h3></caption>
-              <thead style="position: sticky;top: 0" class="thead-dark"></thead>
-              <tr>
-                <th style="background-color: beige;">Date</th>
-                <th style="background-color: antiquewhite;">Min Temp</th>
-                <th style="background-color: beige;">Max Temp</th>
-                <th style="background-color: antiquewhite;">Positive GDD</th>
-                <th style="background-color: beige;">Cumulative Sum</th>
-              </tr>
-              </thead>
-              <tbody id="dataBody">
-                <!-- Table data rows will be added dynamically using JavaScript -->
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <div id="progressBar" class="progress-bar hidden">
+        <div class="progress-bar-inner"></div>
+      </div>
+
+      <div id="dataTable">
+        <table>
+          <thead>
+            <caption id="tableCaption"><h3>Growing Degree Days for County, Period:</h3></caption>
+            <tr>
+              <!-- <th style="background-color: antiquewhite;">Day</th> -->
+              <th style="background-color: beige;">Date</th>
+              <th style="background-color: antiquewhite;">Min Temp</th>
+              <th style="background-color: beige;">Max Temp</th>
+              <!-- <th style="background-color: antiquewhite;">Base Temp</th> -->
+              <!-- <th style="background-color: beige;">Min Accumulated</th> -->
+              <th style="background-color: antiquewhite;">Positive GDD</th>
+              <th style="background-color: beige;">Cumulative Sum</th>
+            </tr>
+          </thead>
+          <tbody id="dataBody">
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <!-- Chart container... -->
     <div class="chart-container">
       <canvas id="chart"></canvas>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-    <script>
-      // Global variable to store temperature values
-      let temperatureValues = [];
-
-      // Add an event listener to execute when the DOM is fully loaded
-      document.addEventListener("DOMContentLoaded", function () {
-        // Set Nairobi as the default region
-        const regionInput = document.getElementById("regionInput");
-        regionInput.value = "Nairobi";
-
-        // Trigger the temperature data fetching for Nairobi
-        const baseTempInput = document.getElementById("baseTempInput");
-        const dateRangeSelect = document.getElementById("dateRange");
-        const event = new Event("submit");
-        document.getElementById("baseTempForm").dispatchEvent(event);
-
-        // Add event listener to update data when region is changed
-        regionInput.addEventListener("change", function () {
-          document.getElementById("baseTempForm").dispatchEvent(event);
-        });
-      });
-    </script>
   </section>
 </body>
 </html>

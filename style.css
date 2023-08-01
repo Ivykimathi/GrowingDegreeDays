@@ -1,8 +1,138 @@
-.table-container {
+/* Add a general styling for the whole page */
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+  }
+  
+  
+  /* Navbar styling */
+  .navbar {
+	background: white;
+	height: 80px;
+	font-size: 1.2em;
+	position: sticky;
+	top: 0;
+	z-index: 1;
+  }
+  
+  .navbar_container {
+	display: flex;
+	justify-content: space-between;
+	height: 80px;
+	z-index: 1;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 0 50px;
+  }
+  
+  .navbar_menu {
+	display: flex;
+	align-items: center;
+	list-style: none;
+  }
+  
+  .navbar_links {
+	color: black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 125px;
+	text-decoration: none;
+	height: 100%;
+	transition: all 0.3s ease;
+  }
+  
+  .navbar_btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 0 1em;
+  }
+  
+  .button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 20px;
+	text-decoration: none;
+	height: 100%;
+	widows: 100%;
+	border: none;
+	outline: none;
+	border-radius: 4px;
+	background: #833ab4;
+	background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
+	background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
+	color: white;
+	transition: all 0.3s ease;
+  }
+  
+  .navbar_links:hover {
+	color: purple;
+	transition: all 0.3s ease;
+  }
+  
+  .home {
+	height: 200px;
+	background-image: url("2.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	margin-top: 0px;
+  }
+  
+  .home p {
+	text-align: center;
+	margin: 40px;
+  }
+  
+  /* Adjust the width of the input section */
+  .table-container {
 	margin-top: 60px;
 	overflow-x: auto;
 	display: flex;
 	
+  }
+  
+  /* Input form styling */
+  #inputs {
+	margin-left: 50px;
+	width: 80%;
+	height: 60%;
+  }
+
+
+  
+  /* Table styling */
+  #dataTable {
+	max-height: 350px;
+	/* Adjust the height as needed */
+	overflow-y: auto;
+	margin-left: 20px;
+	border: 2px solid green;
+	width: 50%;
+	margin-right: 50px;
+  }
+
+  
+  td:not(:last-child) {
+	border-right: 1px solid rgb(243, 24, 4);
+  }
+  
+  caption {
+	top: 0;
+	background-color: white;
+	padding: 10px;
+	font-weight: bold;
+  }
+  
+  th {
+	top: 100px;
+	background-color: #f2f2f2;
+	padding: 10px;
+	font-weight: bold;
   }
   
   .chart-container {
@@ -20,137 +150,55 @@
 	margin-top: 10px;
   }
   
-  /* .progress-bar-inner {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 0;
-	background-color: #4CAF50;
-	border-radius: 3px;
-	transition: width 0.2s ease-in-out;
-  } */
-  
   .hidden {
 	display: none;
   }
   
-.navbar{
-	background: white;
-	height:80px;
-	/*display:flex;
-	justify-content:center;
-	align-items:center; */
-	font-size:1.2em;
-	position:sticky;
-	top:0;
-	z-index:000;
-}
-.navbar_container{
-	display:flex;
-	justify-content:space-between;
-	height:80px;
-	z-index:1;
-	max-width:800px;
-	margin:0 auto; 
-	 padding:0 50px;
-}
-.navbar_menu{
-	display:flex;
-	align-items:center;
-	list-style:none;
-}
-.navbar_links{
-	color: black;
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	width:125px;
-	text-decoration:none;
-	height:100%;
-	transition:all 0.3s ease;
-}
-
-.navbar_btn{
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	width:100%;
-	padding:0 1em;
-}
-
-.button{
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	padding:10px 20px;
-	text-decoration:none;
-	height:100%;
-	widows:100%;
-	border:none;
-	outline:none;
-	border-radius:4px;
-	background:#833ab4;
-	background:-webkit-linear-gradient(to right,#fcb045,#fd1d1d,#833ab4);
-	background:linear-gradient(to right,#fcb045,#fd1d1d,#833ab4);
-	color:white;
-	transition:all 0.3s ease;
-}
-
-.navbar_links:hover {
-	color:purple;
-	transition:all 0.3s ease;
-}
-.home{
-    height: 200px;
-    background-image:url("2.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    margin-top: 0px;
-}
-.home p{
-   text-align: center;
-   margin: 40px;
-}
-
-
-
-#inputs{
-    margin-left: 50px;
-    width: 150px;
-	height: 40%;
-}
-
-#baseTempForm{
-    width: 50%;
-}
-h2,h3{
-    color: green;
-    margin-left: 45px;
-}
-#dataTable{
-    max-height: 350px; /* Adjust the height as needed */
-    overflow-y: auto;
-    margin-left: 20px;
-    border: 2px solid green;
-    width: fit-content;
-}
-
-td:not(:last-child) {
-    border-right: 1px solid rgb(243, 24, 4);
-  } 
-  caption{
-    /* position: sticky; */
-    top: 0;
-    background-color: white;
-    padding: 10px;
-    font-weight: bold;
+  /* Additional styling for the form elements */
+  form {
+	display: flex;
+	flex-direction: column;
   }
-  th{
-    /* position: sticky; */
-    top: 100px;
-    background-color: #f2f2f2;
-    padding: 10px;
-    font-weight: bold;
+  
+  label {
+	margin-top: 10px;
   }
+  
+  input[type="number"],
+  input[type="text"],
+  select {
+	width: 60%;
+	padding: 8px;
+	margin-bottom: 10px;
+  }
+  
+  button[type="submit"] {
+	background-color: #333;
+	color: white;
+	padding: 10px;
+	border: none;
+	cursor: pointer;
+  }
+  
+  /* Additional styling for the table */
+  thead {
+	background-color: #333;
+	color: white;
+  }
+  
+  tbody tr:nth-child(even) {
+	background-color: #f2f2f2;
+  }
+  
+  /* Chart container styling */
+  .chart-container {
+	width: 70%;
+	max-width: 600px;
+  }
+  
+  /* Set the canvas size to match the container */
+  #chart {
+	width: 70%;
+	height: auto;
+  }
+  
